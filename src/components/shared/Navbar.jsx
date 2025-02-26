@@ -1,25 +1,24 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import logoImg from "../../assets/logo.png"
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import axiosCredentialInstance from "../../axios/axiosCredentialInstance";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import logoImg from "../../assets/logo.png";
+import axiosCredentialInstance from "../../axios/axiosCredentialInstance";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Navbar = () => {
-  const {user,setUser,logOut}= useAuthContext();
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { user, setUser, logOut } = useAuthContext();
 
-  const handleLogOut=()=>{
+  const handleLogOut = () => {
     setIsDropdownOpen(false);
     logOut()
       .then(async () => {
         // cookie set when login
         try {
-          const {data} = await axiosCredentialInstance.post(`/remove-jwt`);
+          const { data } = await axiosCredentialInstance.post(`/remove-jwt`);
           // console.log(data)
           toast.success(data?.message);
           setUser(null);
@@ -33,19 +32,17 @@ const Navbar = () => {
         }
       })
       .catch(() => toast.error("error in logged out"));
-  }
+  };
 
   return (
     <nav className="bg-primary-chocolate text-primary-light-chocolate sticky top-0 w-full z-50">
       <div className="container mx-auto flex justify-between items-center px-4 py-3">
         {/* Logo & Website Name */}
         <Link to="/" className="flex items-center gap-1">
-          <img
-            src={logoImg}
-            alt="Logo"
-            className="w-12 h-12"
-          />
-          <span className="text-2xl md:text-3xl font-semibold uppercase">RentEasy</span>
+          <img src={logoImg} alt="Logo" className="w-12 h-12" />
+          <span className="text-2xl md:text-3xl font-semibold uppercase">
+            RentEasy
+          </span>
         </Link>
 
         {/* Nav Links (Hidden in Mobile) */}
@@ -54,7 +51,9 @@ const Navbar = () => {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `hover:text-gray-300 ${isActive ? "border-b-2 border-white" : ""}`
+                `hover:text-gray-300 ${
+                  isActive ? "border-b-2 border-white" : ""
+                }`
               }
             >
               Home
@@ -64,7 +63,9 @@ const Navbar = () => {
             <NavLink
               to="/apartments"
               className={({ isActive }) =>
-                `hover:text-gray-300 ${isActive ? "border-b-2 border-white" : ""}`
+                `hover:text-gray-300 ${
+                  isActive ? "border-b-2 border-white" : ""
+                }`
               }
             >
               Apartment
@@ -74,54 +75,58 @@ const Navbar = () => {
 
         <div className="flex justify-end gap-6 pr-6">
           {/* User Profile / Login */}
-        <div className="relative">
-          {user?.email ? (
-            <div
-              className="cursor-pointer flex items-center gap-2"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-              <img
-                src={user?.photoURL}
-                alt="Profile"
-                className="w-10 h-10 rounded-full border-2 border-white object-cover object-center"
-              />
-            </div>
-          ) : (
-            <Link to="/login" className="text-lg  py-2 px-3 rounded-2xl border border-primary-light-chocolate hover:bg-primary-light-chocolate hover:text-primary-chocolate">
-              🔑 Login
-            </Link>
-          )}
-
-          {/* Dropdown Menu */}
-          {isDropdownOpen  && (
-            <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg py-2">
-              <p className="px-4 py-2 font-semibold">{user.displayName}</p>
-              <hr />
+          <div className="relative">
+            {user?.email ? (
+              <div
+                className="cursor-pointer flex items-center gap-2"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              >
+                <img
+                  src={user?.photoURL}
+                  alt="Profile"
+                  className="w-10 h-10 rounded-full border-2 border-white object-cover object-center"
+                />
+              </div>
+            ) : (
               <Link
-                to="/dashboard"
-                className="block px-4 py-2 hover:bg-gray-100"
+                to="/login"
+                className="text-lg  py-2 px-3 rounded-2xl border border-primary-light-chocolate hover:bg-primary-light-chocolate hover:text-primary-chocolate"
               >
-                Dashboard
+                🔑 Login
               </Link>
-              <button
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                onClick={handleLogOut}
-              >
-                Logout
-              </button>
-            </div>
-          )}
-        </div>
+            )}
 
-        {/* Mobile Menu (Hamburger) */}
-        <div className="md:hidden flex justify-center items-center">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-white focus:outline-none"
-          >
-           <GiHamburgerMenu size={20} />
-          </button>
-        </div>
+            {/* Dropdown Menu */}
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg py-2">
+                <p className="px-4 py-2 font-semibold">{user.displayName}</p>
+                <hr />
+               
+                  <Link
+                    to="/dashboard"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
+                    Dashboard
+                  </Link>
+                <button
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  onClick={handleLogOut}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Menu (Hamburger) */}
+          <div className="md:hidden flex justify-center items-center">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-white focus:outline-none"
+            >
+              <GiHamburgerMenu size={20} />
+            </button>
+          </div>
         </div>
       </div>
 
