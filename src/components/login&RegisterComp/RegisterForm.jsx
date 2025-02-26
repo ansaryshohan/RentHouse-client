@@ -1,9 +1,9 @@
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import InputField from "./InputField";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import axios from "axios";
+import InputField from "./InputField";
 
 const RegisterForm = () => {
   const { signUpWithEmailAndPassword, updateUser } = useAuthContext();
@@ -160,11 +160,20 @@ const RegisterForm = () => {
                   displayName: userInput.userName,
                   photoURL: imgBBData?.data?.url,
                 })
-                  .then( async(result) => {
+                  .then(async (result) => {
                     console.log(result);
-                    const userData= {name:userInput.userName,email:userInput.email}
+                    const userData = {
+                      name: userInput.userName,
+                      email: userInput.email,
+                      image: imgBBData?.data?.url,
+                    };
                     toast.success("user created successfully");
-                    const userCreating = await axios.post(`${import.meta.env.VITE_backend}/rent-easy/user/create-user`,userData);
+                    const userCreating = await axios.post(
+                      `${
+                        import.meta.env.VITE_backend
+                      }/rent-easy/user/create-user`,
+                      userData
+                    );
                     console.log(userCreating);
                     setSubmitLoading(false);
                     navigate("/");
