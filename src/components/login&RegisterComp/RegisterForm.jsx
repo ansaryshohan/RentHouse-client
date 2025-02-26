@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import InputField from "./InputField";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import axios from "axios";
 
 const RegisterForm = () => {
   const { signUpWithEmailAndPassword, updateUser } = useAuthContext();
@@ -159,8 +160,12 @@ const RegisterForm = () => {
                   displayName: userInput.userName,
                   photoURL: imgBBData?.data?.url,
                 })
-                  .then(() => {
+                  .then( async(result) => {
+                    console.log(result);
+                    const userData= {name:userInput.userName,email:userInput.email}
                     toast.success("user created successfully");
+                    const userCreating = await axios.post(`${import.meta.env.VITE_backend}/rent-easy/user/create-user`,userData);
+                    console.log(userCreating);
                     setSubmitLoading(false);
                     navigate("/");
                     return;

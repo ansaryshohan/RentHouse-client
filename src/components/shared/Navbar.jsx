@@ -1,17 +1,39 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logoImg from "../../assets/logo.png"
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import axiosCredentialInstance from "../../axios/axiosCredentialInstance";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const user = {
-    isLoggedIn: true, // Change to false to test
-    name: "John Doe",
-    profilePic: "https://i.pravatar.cc/40?img=10", // Dummy profile image
-  };
+  const {user,setUser,logOut}= useAuthContext();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogOut=()=>{
+    setIsDropdownOpen(false);
+    logOut()
+      .then(async () => {
+        // cookie set when login
+        try {
+          const {data} = await axiosCredentialInstance.post(`/remove-jwt`);
+          // console.log(data)
+          toast.success(data?.message);
+          setUser(null);
+          navigate("/login");
+          return;
+        } catch (error) {
+          console.error(
+            "Failed to get JWT token:",
+            error.response?.data || error.message
+          );
+        }
+      })
+      .catch(() => toast.error("error in logged out"));
+  }
 
   return (
     <nav className="bg-primary-chocolate text-primary-light-chocolate sticky top-0 w-full z-50">
@@ -53,27 +75,27 @@ const Navbar = () => {
         <div className="flex justify-end gap-6 pr-6">
           {/* User Profile / Login */}
         <div className="relative">
-          {user.isLoggedIn ? (
+          {user?.email ? (
             <div
               className="cursor-pointer flex items-center gap-2"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <img
-                src={user.profilePic}
+                src={user?.photoURL}
                 alt="Profile"
-                className="w-10 h-10 rounded-full border-2 border-white"
+                className="w-10 h-10 rounded-full border-2 border-white object-cover object-center"
               />
             </div>
           ) : (
-            <Link to="/login" className="text-lg hover:text-gray-300">
+            <Link to="/login" className="text-lg  py-2 px-3 rounded-2xl border border-primary-light-chocolate hover:bg-primary-light-chocolate hover:text-primary-chocolate">
               🔑 Login
             </Link>
           )}
 
           {/* Dropdown Menu */}
-          {isDropdownOpen && user.isLoggedIn && (
+          {isDropdownOpen  && (
             <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg py-2">
-              <p className="px-4 py-2 font-semibold">{user.name}</p>
+              <p className="px-4 py-2 font-semibold">{user.displayName}</p>
               <hr />
               <Link
                 to="/dashboard"
@@ -83,7 +105,7 @@ const Navbar = () => {
               </Link>
               <button
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                onClick={() => alert("Logged Out!")}
+                onClick={handleLogOut}
               >
                 Logout
               </button>

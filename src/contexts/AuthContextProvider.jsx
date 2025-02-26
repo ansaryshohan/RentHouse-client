@@ -45,11 +45,12 @@ const AuthContextProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       const fetchToken = async () => {
         if (currentUser) {
+          // console.log(currentUser)
           setUser(currentUser);
           // cookie set when login
           try {
             // console.log(currentUser);
-            const response = await axiosCredentialInstance.post(`/jwt`, {
+             await axiosCredentialInstance.post(`/jwt`, {
               userEmail: currentUser?.email,
             });
           } catch (error) {

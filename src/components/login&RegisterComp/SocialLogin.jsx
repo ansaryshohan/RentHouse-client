@@ -1,29 +1,39 @@
-import { toast } from "react-toastify";
+import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
 const SocialLogin = () => {
-  const{loginWithGoogle}=useAuthContext();
-  const navigate= useNavigate();
+  const { loginWithGoogle } = useAuthContext();
+  const navigate = useNavigate();
   let location = useLocation();
 
   let from = location.state?.from || "/";
 
   const handleGoogleSignIn = () => {
     loginWithGoogle()
-      .then((result) => {    
+      .then(async (result) => {
         const user = result.user;
-        if(user?.email){
+        if (user?.email) {
+          // store the user in backend
+          const userData = { name: user?.userName, email: user?.email };
+           await axios.post(
+            `${import.meta.env.VITE_backend}/rent-easy/user/create-user`,
+            userData
+          );
           navigate(from, { replace: true });
-        }  
+        }
       })
       .catch((error) => toast.error(error.code));
   };
   return (
     <>
-      
       <div className="flex justify-center space-x-4">
-        <button aria-label="Log in with Google" className="p-3 rounded-sm" onClick={handleGoogleSignIn}>
+        <button
+          aria-label="Log in with Google"
+          className="p-3 rounded-sm"
+          onClick={handleGoogleSignIn}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"

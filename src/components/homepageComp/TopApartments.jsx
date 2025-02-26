@@ -11,7 +11,7 @@ const TopApartments = () => {
 
   if (topApartmentDataError)
     return "An error has occurred: " + topApartmentDataError.message;
-  console.log(topApartmentData);
+  // console.log(topApartmentData);
 
   return (
     <div className="bg-white text-primary-light-chocolate py-16">
