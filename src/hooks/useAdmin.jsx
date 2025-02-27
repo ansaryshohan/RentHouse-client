@@ -6,8 +6,8 @@ const useAdmin = () => {
   const { user, } = useAuthContext();
   const {axiosCredentialInstance} = useAxiosSecure()
   const {
-    isPending: userRoleDataPending,
-    error: userRoleDataError,
+    isPending: isAdminDataPending,
+    error: isAdminDataError,
     data: isAdminData,
     refetch,
   } = useQuery({
@@ -23,7 +23,7 @@ const useAdmin = () => {
   });
   // console.log(userRoleData)
 
-  return { userRoleDataPending, userRoleDataError, isAdminData, refetch };
+  return { isAdminDataPending, isAdminDataError, isAdminData, refetch };
 };
 
 export default useAdmin;

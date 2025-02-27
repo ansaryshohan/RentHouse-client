@@ -3,6 +3,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logoImg from "../../assets/logo.png";
+import useAdmin from "../../hooks/useAdmin";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
@@ -11,7 +12,8 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { user, setUser, logOut } = useAuthContext();
-  const {axiosCredentialInstance}= useAxiosSecure()
+  const { axiosCredentialInstance } = useAxiosSecure();
+  const { isAdminData, isAdminDataPending } = useAdmin();
 
   const handleLogOut = () => {
     setIsDropdownOpen(false);
@@ -102,13 +104,22 @@ const Navbar = () => {
               <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg py-2">
                 <p className="px-4 py-2 font-semibold">{user.displayName}</p>
                 <hr />
-               
+
+                {!isAdminDataPending && isAdminData ? (
                   <Link
-                    to="/dashboard"
+                    to="/dashboard/admin-home"
                     className="block px-4 py-2 hover:bg-gray-100"
                   >
                     Dashboard
                   </Link>
+                ) : (
+                  <Link
+                    to="/dashboard/user-home"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
+                    Dashboard
+                  </Link>
+                )}
                 <button
                   className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                   onClick={handleLogOut}

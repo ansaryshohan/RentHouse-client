@@ -11,6 +11,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import UserDashBoardPage from "../pages/UserDashBoardPage";
 import MyProfilePage from "../pages/MyProfilePage";
+import AddApartmentPage from "../pages/AddApartmentPage";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "all-apartments",
         element: <AllApartmentsDashboardPage />,
+      },
+      {
+        path: "add-apartment",
+        element: <AddApartmentPage/>,
       },
     ],
   },

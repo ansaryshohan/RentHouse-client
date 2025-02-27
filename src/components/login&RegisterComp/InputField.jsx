@@ -22,7 +22,7 @@ const InputField = ({
       {label && (
         <label className="label" htmlFor={id}>
           <span className={`label-text ${customClassName} text-base`}>
-            {label} {requiredStar && <sup className="text-primary-orange font-bold">*</sup>}{" "}
+            {label} {requiredStar && <sup className="text-primary-chocolate font-bold">*</sup>}{" "}
           </span>
         </label>
       )}
