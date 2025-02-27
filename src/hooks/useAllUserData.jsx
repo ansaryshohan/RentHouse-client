@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import axiosCredentialInstance from "../axios/axiosCredentialInstance";
-
+import useAxiosSecure from "./useAxiosSecure";
 
 const useAllUserData = (currentPageNo,perPageData) => {
+  const {axiosCredentialInstance}= useAxiosSecure();
   const {
     isPending: allUsersDataPending,
     error: allUsersDataError,

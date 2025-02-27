@@ -1,16 +1,17 @@
 import Swal from "sweetalert2";
 import useAllUserData from "../hooks/useAllUserData";
 import { useState } from "react";
-import axiosCredentialInstance from "../axios/axiosCredentialInstance";
 import Title from "../components/shared/Title";
 import SingleUserRow from "../components/allUsersDashboardComp.jsx/SingleUserRow";
 import LoadingSpinner from "../components/shared/LoadingSpinner";
 import Pagination from "../components/shared/Pagination";
 import SectionHeader from "../components/shared/SectionHeader";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 const AllUsersDashboardPage = () => {
   const [currentPageNo, setCurrentPageNo] = useState(0);
+  const {axiosCredentialInstance}= useAxiosSecure()
   const { allUsersDataPending, allUsersDataError,allUsersData,refetch }= useAllUserData(currentPageNo,4);
   
 

@@ -160,8 +160,8 @@ const RegisterForm = () => {
                   displayName: userInput.userName,
                   photoURL: imgBBData?.data?.url,
                 })
-                  .then(async (result) => {
-                    console.log(result);
+                  .then(async () => {
+                    // console.log(result);
                     const userData = {
                       name: userInput.userName,
                       email: userInput.email,

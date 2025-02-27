@@ -1,27 +1,29 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useAuthContext } from "./useAuthContext";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useAdmin = () => {
-  const {user}= useAuthContext();
+  const { user, } = useAuthContext();
+  const {axiosCredentialInstance} = useAxiosSecure()
   const {
     isPending: userRoleDataPending,
     error: userRoleDataError,
-    data: userRoleData,
-    refetch
+    data: isAdminData,
+    refetch,
   } = useQuery({
-    queryKey: ["userRole",user.email],
+    queryKey: ["userRole", user?.email],
     queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_backend}/rent-easy/user/user-role/${user.email}`
-      );
-      // console.log(res.data);
-      return res?.data?.data;
+        const res = await axiosCredentialInstance.get(
+          `${import.meta.env.VITE_backend}/rent-easy/user/user-role/${
+            user?.email
+          }`
+        );
+        return res?.data?.data;
     },
   });
   // console.log(userRoleData)
 
-  return { userRoleDataPending, userRoleDataError, userRoleData,refetch };
-}
+  return { userRoleDataPending, userRoleDataError, isAdminData, refetch };
+};
 
-export default useAdmin
+export default useAdmin;

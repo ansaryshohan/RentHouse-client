@@ -3,14 +3,15 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logoImg from "../../assets/logo.png";
-import axiosCredentialInstance from "../../axios/axiosCredentialInstance";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { user, setUser, logOut } = useAuthContext();
+  const {axiosCredentialInstance}= useAxiosSecure()
 
   const handleLogOut = () => {
     setIsDropdownOpen(false);
