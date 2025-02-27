@@ -69,6 +69,18 @@ const SideBar = () => {
                   All Apartment
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/dashboard/my-apartments"
+                  className={({ isActive }) =>
+                    `hover:text-gray-300 ${
+                      isActive ? "border-b-2 border-white" : ""
+                    }`
+                  }
+                >
+                  My Apartments
+                </NavLink>
+              </li>
             </ul>
           </div>
         </>
@@ -87,18 +99,6 @@ const SideBar = () => {
                   }
                 >
                   User Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/add-apartment"
-                  className={({ isActive }) =>
-                    `hover:text-gray-300 ${
-                      isActive ? "border-b-2 border-white" : ""
-                    }`
-                  }
-                >
-                  Add Apartment
                 </NavLink>
               </li>
               <li>

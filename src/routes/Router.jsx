@@ -11,8 +11,12 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import MyProfilePage from "../pages/MyProfilePage";
 import RegisterPage from "../pages/RegisterPage";
-import UserDashBoardPage from "../pages/UserDashBoardPage";
 import SingleApartmentPage from "../pages/SingleApartmentPage";
+import UserDashBoardPage from "../pages/UserDashBoardPage";
+import AdminRoute from "./AdminRoute";
+import PrivateRoute from "./PrivateRoute";
+import RestrictedRoute from "./RestrictedRoute";
+import MyApartmentDashboardPage from "../pages/MyApartmentDashboardPage";
 
 const router = createBrowserRouter([
   {
@@ -34,15 +38,29 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <MyProfilePage />,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <MyProfilePage />{" "}
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",
-        element: <LoginPage />,
+        element: (
+          <RestrictedRoute>
+            <LoginPage />
+          </RestrictedRoute>
+        ),
       },
       {
         path: "register",
-        element: <RegisterPage />,
+        element: (
+          <RestrictedRoute>
+            {" "}
+            <RegisterPage />{" "}
+          </RestrictedRoute>
+        ),
       },
     ],
   },
@@ -51,25 +69,62 @@ const router = createBrowserRouter([
     element: <DashBoardLayout />,
     errorElement: <ErrorPage />,
     children: [
+      // admin dashboard routes
       {
         path: "admin-home",
-        element: <AdminDashBoardPage />,
-      },
-      {
-        path: "user-home",
-        element: <UserDashBoardPage />,
+        element: (
+          <AdminRoute>
+            {" "}
+            <AdminDashBoardPage />{" "}
+          </AdminRoute>
+        ),
       },
       {
         path: "all-users",
-        element: <AllUsersDashboardPage />,
+        element: (
+          <AdminRoute>
+            {" "}
+            <AllUsersDashboardPage />
+          </AdminRoute>
+        ),
       },
       {
         path: "all-apartments",
-        element: <AllApartmentsDashboardPage />,
+        element: (
+          <AdminRoute>
+            {" "}
+            <AllApartmentsDashboardPage />{" "}
+          </AdminRoute>
+        ),
       },
+      // user dashboard routes
+      {
+        path: "user-home",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <UserDashBoardPage />{" "}
+          </PrivateRoute>
+        ),
+      },
+      // common routes
       {
         path: "add-apartment",
-        element: <AddApartmentPage />,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <AddApartmentPage />{" "}
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-apartments",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <MyApartmentDashboardPage />{" "}
+          </PrivateRoute>
+        ),
       },
     ],
   },
