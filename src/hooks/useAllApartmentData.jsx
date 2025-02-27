@@ -1,24 +1,30 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import useAxiosSecure from "./useAxiosSecure";
 
-const useAllApartmentData = (currentPageNo, perPageData,priceSort,apartmentCategory,searchText) => {
+const useAllApartmentData = (currentPageNo,perPageData, priceSort="" ) => {
+  const { axiosCredentialInstance } = useAxiosSecure();
   const {
     isPending: allApartmentDataPending,
     error: allApartmentDataError,
     data: allApartmentData,
-    refetch
+    refetch,
   } = useQuery({
-    queryKey: ["allApartment",currentPageNo,priceSort,apartmentCategory,searchText],
+    queryKey: ["allApartment", currentPageNo, priceSort],
     queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_backend}/rent-easy/apartments/approved-apartments?perPageData=${perPageData}&pageNo=${currentPageNo}&priceSort=${priceSort}&apartmentType=${apartmentCategory}&searchText=${searchText}`
+      const res = await axiosCredentialInstance.get(
+        `/rent-easy/apartments/all-apartments?perPageData=${perPageData}&pageNo=${currentPageNo}&priceSort=${priceSort}`
       );
-      // console.log(res.data);
+      // console.log(res.data.data);
       return res?.data?.data;
     },
   });
 
-  return { allApartmentDataPending, allApartmentDataError, allApartmentData,refetch };
+  return {
+    allApartmentDataPending,
+    allApartmentDataError,
+    allApartmentData,
+    refetch,
+  };
 };
 
 export default useAllApartmentData;

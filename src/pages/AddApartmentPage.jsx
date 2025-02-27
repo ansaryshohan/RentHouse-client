@@ -19,16 +19,14 @@ const AddApartmentPage = () => {
         }}
       >
         <div className="relative w-full h-full lg:w-11/12 top-0 text-white ">
-          <SectionHeader colorTitle={"Apartment"} title={"Add"}/>
+          <SectionHeader colorTitle={"Apartment"} title={"Add"} />
           <div className="w-11/12 mx-auto px-4 py-10  bg-gray-background rounded-2xl">
-            
-            <AddApartmentForm/>
-            
+            <AddApartmentForm />
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddApartmentPage
+export default AddApartmentPage;

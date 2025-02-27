@@ -1,17 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashBoardLayout from "../layouts/DashBoardLayout";
 import MainLayout from "../layouts/MainLayout";
+import AddApartmentPage from "../pages/AddApartmentPage";
 import AdminDashBoardPage from "../pages/AdminDashBoardPage";
-import AllApartmentPage from "../pages/AllApartmentPage";
 import AllApartmentsDashboardPage from "../pages/AllApartmentsDashboardPage";
 import AllUsersDashboardPage from "../pages/AllUsersDashboardPage";
+import ApprovedApartmentPage from "../pages/ApprovedApartmentPage";
 import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
+import MyProfilePage from "../pages/MyProfilePage";
 import RegisterPage from "../pages/RegisterPage";
 import UserDashBoardPage from "../pages/UserDashBoardPage";
-import MyProfilePage from "../pages/MyProfilePage";
-import AddApartmentPage from "../pages/AddApartmentPage";
+import SingleApartmentPage from "../pages/SingleApartmentPage";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,11 @@ const router = createBrowserRouter([
       },
       {
         path: "apartments",
-        element: <AllApartmentPage />,
+        element: <ApprovedApartmentPage />,
+      },
+      {
+        path: "apartment/:id",
+        element: <SingleApartmentPage />,
       },
       {
         path: "profile",
@@ -64,7 +69,7 @@ const router = createBrowserRouter([
       },
       {
         path: "add-apartment",
-        element: <AddApartmentPage/>,
+        element: <AddApartmentPage />,
       },
     ],
   },

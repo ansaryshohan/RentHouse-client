@@ -1,8 +1,7 @@
-
 import SingleTopApartment from "../homepageComp/SingleTopApartment";
 import LoadingSpinner from "../shared/LoadingSpinner";
 
-const AllApartments = ({ isPending, error, data }) => {
+const ApprovedApartments = ({ isPending, error, data }) => {
   if (error) return "An error has occurred: " + error.message;
 
   // console.log(data);
@@ -30,4 +29,4 @@ const AllApartments = ({ isPending, error, data }) => {
   );
 };
 
-export default AllApartments;
+export default ApprovedApartments;

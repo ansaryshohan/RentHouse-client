@@ -49,7 +49,7 @@ const SingleUserRow = ({
         </td>
         <td></td>
         <th className="grid place-content-center h-full">
-          {/* delete the car booking data */}
+          {/* delete the user data */}
           <div className="flex items-center justify-center">
             <button
               id="delete"

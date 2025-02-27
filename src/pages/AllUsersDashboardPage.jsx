@@ -70,7 +70,7 @@ const AllUsersDashboardPage = () => {
           `/rent-easy/user/delete-user/${userId}`
         );
         console.log(deletedData)
-        if (deletedData.status === 201) {
+        if (deletedData.status === 200) {
           refetch();
           Swal.fire({
             title: "Deleted!",
@@ -92,7 +92,6 @@ const AllUsersDashboardPage = () => {
   return (
     <div className="w-full h-full flex justify-center">
       <Title title={"AllUsers | RentEasy"} />
-      {/* <UpdateReviewModal setMyReviews={setMyReviews} /> */}
       <div
         className="relative w-full min-h-screen pb-10"
         style={{

@@ -71,7 +71,7 @@ const FilterAndSortSection = ({
             )}
           </div>
           <div className="divider divider-horizontal"></div>
-          {/* car category select input */}
+          {/* apartment category select input */}
           <div className=" rounded-box grid  grow place-items-center mr-3">
             <select
               name="carType"
