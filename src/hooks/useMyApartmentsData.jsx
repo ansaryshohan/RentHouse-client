@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "./useAxiosSecure";
 import { useAuthContext } from "./useAuthContext";
+import useAxiosSecure from "./useAxiosSecure";
 
-
-const useMyApartmentsData = (currentPageNo,perPageData,priceSort) => {
+const useMyApartmentsData = (currentPageNo, perPageData, priceSort) => {
   const { axiosCredentialInstance } = useAxiosSecure();
-  const {user}= useAuthContext();
+  const { user } = useAuthContext();
   const {
     isPending: userApartmentDataPending,
     error: userApartmentDataError,
@@ -28,6 +27,6 @@ const useMyApartmentsData = (currentPageNo,perPageData,priceSort) => {
     userApartmentData,
     refetch,
   };
-}
+};
 
-export default useMyApartmentsData
+export default useMyApartmentsData;

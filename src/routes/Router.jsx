@@ -17,6 +17,7 @@ import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import RestrictedRoute from "./RestrictedRoute";
 import MyApartmentDashboardPage from "../pages/MyApartmentDashboardPage";
+import MakePaymentDashboardPage from "../pages/MakePaymentDashboardPage";
 
 const router = createBrowserRouter([
   {
@@ -104,6 +105,15 @@ const router = createBrowserRouter([
           <PrivateRoute>
             {" "}
             <UserDashBoardPage />{" "}
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "make-payment",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <MakePaymentDashboardPage />{" "}
           </PrivateRoute>
         ),
       },

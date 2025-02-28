@@ -1,25 +1,20 @@
 import { useState } from "react";
-import SectionHeader from "../components/shared/SectionHeader";
-import Title from "../components/shared/Title";
-import useMyApartmentsData from "../hooks/useMyApartmentsData";
-import LoadingSpinner from "../components/shared/LoadingSpinner";
-import SingleMyApartmentRow from "../components/myApartmentDashboardComp/SingleMyApartmentRow";
-import Pagination from "../components/shared/Pagination";
 import Swal from "sweetalert2";
 import axiosCredentialInstance from "../axios/axiosCredentialInstance";
+import SingleMyApartmentRow from "../components/myApartmentDashboardComp/SingleMyApartmentRow";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
+import Pagination from "../components/shared/Pagination";
+import SectionHeader from "../components/shared/SectionHeader";
+import Title from "../components/shared/Title";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import useMyApartmentsData from "../hooks/useMyApartmentsData";
 
 const MyApartmentDashboardPage = () => {
-
   const [currentPageNo, setCurrentPageNo] = useState(0);
   const [priceSort, setPriceSort] = useState("");
-  const{user}= useAuthContext()
-  const {
-    userApartmentDataPending,
-    userApartmentData,
-    refetch,
-  } = useMyApartmentsData(currentPageNo, 6, priceSort);
+  const { user } = useAuthContext();
+  const { userApartmentDataPending, userApartmentData, refetch } =
+    useMyApartmentsData(currentPageNo, 6, priceSort);
   const totalPageNumber = Math.ceil(
     Number(userApartmentData?.totalNoOfApartmentsByUser) / 6
   );
@@ -153,7 +148,7 @@ const MyApartmentDashboardPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MyApartmentDashboardPage
+export default MyApartmentDashboardPage;

@@ -115,14 +115,26 @@ const SideBar = () => {
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/my-bookings"
+                  to="/dashboard/make-payment"
                   className={({ isActive }) =>
                     `hover:text-gray-300 ${
                       isActive ? "border-b-2 border-white" : ""
                     }`
                   }
                 >
-                  My Booking
+                  Make Payment
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/payment-history"
+                  className={({ isActive }) =>
+                    `hover:text-gray-300 ${
+                      isActive ? "border-b-2 border-white" : ""
+                    }`
+                  }
+                >
+                  Payment History
                 </NavLink>
               </li>
               <li>

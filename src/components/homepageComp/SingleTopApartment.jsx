@@ -28,6 +28,7 @@ const SingleTopApartment = ({ singleApartment }) => {
     <div className="bg-black rounded-3xl pb-4">
       {/* card image */}
       <div className="relative">
+        <Link to={`/apartment/${_id}`}>
         <img
           src={mainImage}
           alt={apartmentName}
@@ -50,10 +51,11 @@ const SingleTopApartment = ({ singleApartment }) => {
             </span>
           )}
         </p>
+        </Link>
       </div>
       {/* apartment name and info */}
       <div className=" w-10/12 mx-auto py-4 px-2 border-b border-dashed border-dull-text/70 mb-2">
-        <h3 className="text-xl font-semibold hover:text-primary-orange hover:duration-500 mb-1">
+        <h3 className="text-xl font-semibold hover:text-secondary-chocolate hover:duration-500 mb-1">
           <Link to={`/apartment/${_id}`}>{apartmentName}</Link>
         </h3>
         <p className="text-sm text-dull-text flex items-center gap-1">
