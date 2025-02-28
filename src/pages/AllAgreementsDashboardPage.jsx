@@ -1,27 +1,27 @@
 import { useState } from "react";
-import Swal from "sweetalert2";
-import SingleApartmentRow from "../components/allApartmentDashboardComp/SingleApartmentRow";
-import LoadingSpinner from "../components/shared/LoadingSpinner";
-import Pagination from "../components/shared/Pagination";
-import SectionHeader from "../components/shared/SectionHeader";
-import Title from "../components/shared/Title";
-import useAllApartmentData from "../hooks/useAllApartmentData";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import Title from "../components/shared/Title";
+import SectionHeader from "../components/shared/SectionHeader";
+import useAllAgreementsData from "../hooks/useAllAgreementsData";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
+import SingleAgreementRow from "../components/allAgreementsComp/SingleAgreementRow";
+import Pagination from "../components/shared/Pagination";
 
-const AllApartmentsDashboardPage = () => {
+const AllAgreementsDashboardPage =() => {
   const [currentPageNo, setCurrentPageNo] = useState(0);
   const [priceSort, setPriceSort] = useState("");
   const { user } = useAuthContext();
-  const {axiosCredentialInstance}= useAxiosSecure();
+  const {axiosCredentialInstance}= useAxiosSecure()
   const {
-    allApartmentDataPending,
-    // allApartmentDataError,
-    allApartmentData,
+    allAgreementsDataPending,
+    allAgreementsDataError,
+    allAgreementsData,
     refetch,
-  } = useAllApartmentData(currentPageNo, 6, priceSort);
+  } = useAllAgreementsData(currentPageNo, 6, priceSort);
   const totalPageNumber = Math.ceil(
-    Number(allApartmentData?.totalNoOfApartments) / 6
+    Number(allAgreementsData?.totalNoOfAgreements) / 6
   );
 
   // approve an apartment
@@ -134,13 +134,13 @@ const AllApartmentsDashboardPage = () => {
 
   return (
     <div className="w-full h-full flex justify-center">
-      <Title title={"All-Apartments | RentEasy"} />
+      <Title title={"All-Agreements | RentEasy"} />
       <div className="w-full h-full pb-10">
         <div className="relative w-full h-full  text-white ">
-          <SectionHeader colorTitle={"Apartments"} title={"All"} />
+          <SectionHeader colorTitle={"Agreements"} title={"All"} />
           <div className="relative w-11/12 mx-auto px-2 py-10  bg-gray-background rounded-2xl">
             {/* sorting by price */}
-            {allApartmentData?.allApartments?.length > 0 && (
+            {allAgreementsData?.allAgreements?.length > 0 && (
               <div className="absolute right-2 top-2 flex items-center justify-center gap-2 bg-white text-black px-5 py-2 rounded-4xl">
                 <p className="text-sm font-semibold text-primary-orange">
                   sort by :
@@ -159,13 +159,13 @@ const AllApartmentsDashboardPage = () => {
               </div>
             )}
             {/* table for apartment */}
-            {allApartmentDataPending ? (
+            {allAgreementsDataPending ? (
               <>
                 <LoadingSpinner />{" "}
               </>
             ) : (
               <>
-                {allApartmentData?.allApartments?.length > 0 ? (
+                {allAgreementsData?.allAgreements?.length > 0 ? (
                   <div className="overflow-x-auto py-10">
                     <table className="table text-white mb-6">
                       {/* head */}
@@ -174,19 +174,19 @@ const AllApartmentsDashboardPage = () => {
                           <th>SI</th>
                           <th>Apartment Info</th>
                           <th>Location</th>
-                          <th className="">Details</th>
+                          <th className="">User Email</th>
                           <th className="text-center">Price</th>
-                          <th className="text-center">Status</th>
+                          <th className="text-center">Payment</th>
                           <th className="text-center">Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {allApartmentData?.allApartments?.map(
-                          (singleApartmentData, index) => (
-                            <SingleApartmentRow
-                              key={singleApartmentData._id}
+                        {allAgreementsData?.allAgreements?.map(
+                          (singleAgreementData, index) => (
+                            <SingleAgreementRow
+                              key={singleAgreementData._id}
                               indexNo={index}
-                              rowData={singleApartmentData}
+                              rowData={singleAgreementData}
                               handleApartmentDelete={handleApartmentDelete}
                               handleApartmentApprove={handleApartmentApprove}
                               handleApartmentReject={handleApartmentReject}
@@ -207,7 +207,7 @@ const AllApartmentsDashboardPage = () => {
                   <div className="w-10/12 mx-auto h-full flex justify-center items-center py-16">
                     {" "}
                     <h3 className="text-2xl font-bold text-red-600 text-center">
-                      No Apartment found
+                      No Agreements found
                     </h3>{" "}
                   </div>
                 )}
@@ -220,4 +220,5 @@ const AllApartmentsDashboardPage = () => {
   );
 };
 
-export default AllApartmentsDashboardPage;
+
+export default AllAgreementsDashboardPage

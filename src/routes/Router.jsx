@@ -19,6 +19,7 @@ import RestrictedRoute from "./RestrictedRoute";
 import MyApartmentDashboardPage from "../pages/MyApartmentDashboardPage";
 import MakePaymentDashboardPage from "../pages/MakePaymentDashboardPage";
 import PaymentHistoryDashboardPage from "../pages/PaymentHistoryDashboardPage";
+import AllAgreementsDashboardPage from "../pages/AllAgreementsDashboardPage";
 
 const router = createBrowserRouter([
   {
@@ -96,6 +97,15 @@ const router = createBrowserRouter([
           <AdminRoute>
             {" "}
             <AllApartmentsDashboardPage />{" "}
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "all-agreements",
+        element: (
+          <AdminRoute>
+            {" "}
+            <AllAgreementsDashboardPage />{" "}
           </AdminRoute>
         ),
       },

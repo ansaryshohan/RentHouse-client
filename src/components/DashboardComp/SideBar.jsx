@@ -9,7 +9,7 @@ const SideBar = () => {
     <div className=" w-full h-[100vh] sticky top-0 bg-primary-chocolate text-primary-light-chocolate flex flex-col justify-start items-center gap-6  pt-6 px-3">
       <div className=" w-full mb-4 mt-4">
         {/* Logo & Website Name */}
-        <Link to="/" className="flex items-center gap-1 w-full">
+        <Link to="/" className="flex items-center justify-center gap-1 w-full">
           <img src={logoImg} alt="Logo" className="w-12 h-12" />
           <span className="text-2xl md:text-3xl font-semibold uppercase">
             RentEasy
@@ -47,14 +47,14 @@ const SideBar = () => {
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/add-apartment"
+                  to="/dashboard/all-agreements"
                   className={({ isActive }) =>
                     `hover:text-gray-300 ${
                       isActive ? "border-b-2 border-white" : ""
                     }`
                   }
                 >
-                  Add Apartment
+                  All Agreements
                 </NavLink>
               </li>
               <li>
@@ -67,6 +67,18 @@ const SideBar = () => {
                   }
                 >
                   All Apartment
+                </NavLink>
+              </li>             
+              <li>
+                <NavLink
+                  to="/dashboard/add-apartment"
+                  className={({ isActive }) =>
+                    `hover:text-gray-300 ${
+                      isActive ? "border-b-2 border-white" : ""
+                    }`
+                  }
+                >
+                  Add Apartment
                 </NavLink>
               </li>
               <li>
