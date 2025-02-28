@@ -1,9 +1,8 @@
 import { FaBath, FaBed } from "react-icons/fa";
 import { FaLocationPin } from "react-icons/fa6";
 import { RiArrowRightUpFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
 
-const LeftSideCard = ({ singleApartment }) => {
+const LeftSideCard = ({ singleApartment,handleAgreement }) => {
   const {
     apartmentName,
     location,
@@ -11,7 +10,6 @@ const LeftSideCard = ({ singleApartment }) => {
     addedBy: { email, name },
     category,
     availability,
-    adminApproval,
     houseInfo: { bedroom, bathroom },
     mainImage,
   } = singleApartment;
@@ -54,8 +52,8 @@ const LeftSideCard = ({ singleApartment }) => {
           </p>
           {/* book now button */}
           <div className="w-full flex items-center justify-start pt-4">
-            <Link
-              to={adminApproval === "approved" && `/dashboard/make-payment`}
+            <div
+              onClick={handleAgreement}
               className="hover:transition-all hover:duration-500 hover:scale-x-[95%] flex items-center gap-0.5"
             >
               <button className="px-5 py-2 rounded-4xl border border-primary-orange  text-base font-bold bg-secondary-chocolate text-white ">
@@ -65,7 +63,7 @@ const LeftSideCard = ({ singleApartment }) => {
               <button className="px-2 py-2 rounded-full border border-primary-light-chocolate  text-base font-bold bg-secondary-chocolate text-white text-center">
                 <RiArrowRightUpFill size={20} color="#ffffff" />
               </button>
-            </Link>
+            </div>
           </div>
         </div>
         {/* apartment info bedroom and bathroom  */}

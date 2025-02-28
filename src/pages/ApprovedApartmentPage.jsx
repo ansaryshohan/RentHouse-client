@@ -21,7 +21,7 @@ const ApprovedApartmentPage = () => {
     refetch,
   } = useApprovedApartmentData(
     currentPageNo,
-    9,
+    6,
     priceSort,
     filterDataSearch.apartmentType,
     filterDataSearch.search

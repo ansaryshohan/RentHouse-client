@@ -17,6 +17,7 @@ const LoginForm = () => {
   });
   const navigate = useNavigate();
   let location = useLocation();
+  // console.log(location);
 
   let from = location.state?.from || "/";
 

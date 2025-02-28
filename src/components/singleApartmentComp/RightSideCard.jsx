@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import apartmentIcon from "../../assets/apartments-100.png";
 import lockIcon from "../../assets/lock-100.png";
 
@@ -17,7 +16,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 
-const RightSideCard = ({ singleApartment }) => {
+const RightSideCard = ({ singleApartment, handleAgreement }) => {
   const {
     apartmentName,
     location,
@@ -28,7 +27,6 @@ const RightSideCard = ({ singleApartment }) => {
     amenities,
     mainImage,
     images,
-    adminApproval,
   } = singleApartment;
   const swiperImgArray = [mainImage, ...images];
   // console.log(swiperImgArray);
@@ -48,7 +46,7 @@ const RightSideCard = ({ singleApartment }) => {
             modules={[Pagination, Navigation]}
             className="mySwiper w-full"
           >
-            {swiperImgArray.map((singleImageUrl,idx) => (
+            {swiperImgArray.map((singleImageUrl, idx) => (
               <SwiperSlide key={idx} className="max-w-full">
                 {" "}
                 <img
@@ -166,12 +164,13 @@ const RightSideCard = ({ singleApartment }) => {
       </div>
       {/* book now button */}
       <div className=" w-full bottom-12  flex items-center justify-center">
-        <Link to={adminApproval === "approved" && `/dashboard/make-payment`}>
-          <button className="px-12 py-3 rounded-4xl border border-primary-light-chocolate bg-transparent text-primary-light-chocolate text-lg font-bold hover:bg-primary-light-chocolate hover:text-white hover:transition-all hover:duration-500 hover:scale-x-[85%]">
-            {" "}
-            Make Agreement
-          </button>
-        </Link>
+        <button
+          className="px-12 py-3 rounded-4xl border border-primary-light-chocolate bg-transparent text-primary-light-chocolate text-lg font-bold hover:bg-primary-light-chocolate hover:text-white hover:transition-all hover:duration-500 hover:scale-x-[85%]"
+          onClick={handleAgreement}
+        >
+          {" "}
+          Make Agreement
+        </button>
       </div>
     </div>
   );
