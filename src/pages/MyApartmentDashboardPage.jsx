@@ -58,39 +58,33 @@ const MyApartmentDashboardPage = () => {
 
   return (
     <div className="w-full h-full flex justify-center">
-      <Title title={"MyApartments | RentEasy"} />
-      {/* <UpdateReviewModal setMyReviews={setMyReviews} /> */}
+      <Title title={"My-Apartments | RentEasy"} />
       <div
-        className="relative w-full min-h-screen pb-10"
-        style={{
-          background:
-            "linear-gradient(to right, #ab9d90 0%,#d6c9c0 22%,#d6c9c0 80%,#d6c9c0 80%,#ab9d90 100%)",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundAttachment: "fixed",
-        }}
+        className="relative w-full h-full pb-10"
       >
         <div className="relative w-full h-full  top-0 text-white ">
           <SectionHeader colorTitle={"Apartments"} title={"My Added"} />
           <div className="relative w-11/12 mx-auto px-2 py-10  bg-gray-background rounded-2xl">
             {/* sorting by price */}
-            <div className="absolute right-2 top-2 flex items-center justify-center gap-2 bg-white text-black px-5 py-2 rounded-4xl">
-              <p className="text-sm font-semibold text-primary-orange">
-                sort by :
-              </p>
-              <select
-                name="genre"
-                id="genre"
-                defaultValue={priceSort}
-                onChange={(e) => setPriceSort(e.target.value)}
-                className="bg-black text-sm text-white"
-              >
-                <option value="">No filter Selected</option>
-                <option value="price_asc">Price Ascending</option>
-                <option value="price_dsc">Price Descending</option>
-              </select>
-            </div>
+            {
+              userApartmentData?.allApartmentsByUser?.length > 0 && 
+              <div className="absolute right-2 top-2 flex items-center justify-center gap-2 bg-white text-black px-5 py-2 rounded-4xl">
+                <p className="text-sm font-semibold text-primary-orange">
+                  sort by :
+                </p>
+                <select
+                  name="genre"
+                  id="genre"
+                  defaultValue={priceSort}
+                  onChange={(e) => setPriceSort(e.target.value)}
+                  className="bg-black text-sm text-white"
+                >
+                  <option value="">No filter Selected</option>
+                  <option value="price_asc">Price Ascending</option>
+                  <option value="price_dsc">Price Descending</option>
+                </select>
+              </div>
+            }
             {/* table for apartment */}
             {userApartmentDataPending ? (
               <>
@@ -138,7 +132,7 @@ const MyApartmentDashboardPage = () => {
                   <div className="w-10/12 mx-auto h-full flex justify-center items-center py-16">
                     {" "}
                     <h3 className="text-2xl font-bold text-red-600 text-center">
-                      No Users is here Yet
+                      No  Apartment added by you
                     </h3>{" "}
                   </div>
                 )}

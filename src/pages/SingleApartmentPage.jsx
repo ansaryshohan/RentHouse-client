@@ -39,6 +39,7 @@ const SingleApartmentPage = () => {
       floorNo: data?.floorNo,
       blockNo: data?.blockNo,
       houseNo: data.houseNo,
+      location:data.location,
       price: data?.price,
       apartmentImage: data?.mainImage,
       apartmentName: data.apartmentName,

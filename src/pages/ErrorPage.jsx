@@ -8,7 +8,7 @@ const ErrorPage = () => {
   // console.log(error)
   return (
     <div className="w-full pt-20 flex flex-col justify-center items-center text-center gap-4">
-      <Title title={"Caravan"}/>
+      <Title title={"Error | RentEasy"}/>
       <img src={errorImg} alt="error image" className="w-7/12 h-80 object-cover" />
       <p className="text-xl font-semibold">Sorry, an unexpected error has occurred.</p>
       <p>

@@ -91,19 +91,11 @@ const AllUsersDashboardPage = () => {
   // console.log(data?.bookings[0].bookedCars);
   return (
     <div className="w-full h-full flex justify-center">
-      <Title title={"AllUsers | RentEasy"} />
+      <Title title={"All-Users | RentEasy"} />
       <div
-        className="relative w-full min-h-screen pb-10"
-        style={{
-          background:
-            "linear-gradient(to right, #ab9d90 0%,#d6c9c0 22%,#d6c9c0 80%,#d6c9c0 80%,#ab9d90 100%)",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundAttachment: "fixed",
-        }}
+        className="relative w-full h-full pb-10"
       >
-        <div className="relative w-full h-full lg:w-11/12 top-0 text-white ">
+        <div className="relative w-full h-full text-white ">
           <SectionHeader colorTitle={"Users"} title={"All"}/>
           <div className="w-11/12 mx-auto px-4 py-10  bg-gray-background rounded-2xl">
             {/*  */}
