@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import InputField from "./InputField";
 
 const RegisterForm = () => {
@@ -24,6 +24,7 @@ const RegisterForm = () => {
     registerError: "",
   });
   const navigate = useNavigate();
+  const { axiosCredentialInstance } = useAxiosSecure();
 
   const handleUserInputOnChange = (e) => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
@@ -168,9 +169,9 @@ const RegisterForm = () => {
                       image: imgBBData?.data?.url,
                     };
                     toast.success("user created successfully");
-                    const userCreating = await axios.post(
+                    const userCreating = await axiosCredentialInstance.post(
                       `${
-                        import.meta.env.VITE_backend
+                        import.meta.env.VITE_render_backend
                       }/rent-easy/user/create-user`,
                       userData
                     );

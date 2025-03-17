@@ -1,31 +1,38 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const FilterAndSortSection = ({
   priceSort,
   setPriceSort,
   filterDataSearch,
   setFilterDataSearch,
-  handleSearchSubmit
+  handleSearchSubmit,
 }) => {
+  const [apartmentModelDataAccordingSearch,setApartmentModelDataAccordingSearch]=useState([]);
+  const [apartmentLocationDataPending,setApartmentLocationDataPending]=useState(false);
+  const { axiosCredentialInstance } = useAxiosSecure();
   const [dropdown, setDropdown] = useState(false);
-  const {
-    isPending: apartmentLocationDataPending,
-    // error: carModelDataError,
-    data: apartmentModelDataAccordingSearch,
-  } = useQuery({
-    queryKey: ["apartmentLocation", filterDataSearch.search],
-    queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_backend}/rent-easy/apartments/search-apartments?searchText=${
-          filterDataSearch.search
-        }`
-      );
-      return res.data?.data;
-    },
-  });
+
+  const handleOnChangeSearch= async (e)=>{
+    setFilterDataSearch((prev) => ({
+      ...prev,
+      search: e.target.value,
+    }))
+    setApartmentLocationDataPending(true)
+    const res = await axiosCredentialInstance.get(
+      `${
+        import.meta.env.VITE_render_backend
+      }/rent-easy/apartments/search-apartments?searchText=${
+        filterDataSearch.search
+      }`
+    );
+    if(res.status===200){
+      setApartmentLocationDataPending(false);
+      return setApartmentModelDataAccordingSearch(res.data?.data);
+    }
+  }
+ 
   // console.log(apartmentModelDataAccordingSearch)
 
   const handleSearch = (apartmentLocation) => {
@@ -33,7 +40,8 @@ const FilterAndSortSection = ({
     setDropdown(false);
   };
 
-  const searchQueryShow = dropdown && apartmentModelDataAccordingSearch?.length > 0;
+  const searchQueryShow =
+    dropdown && apartmentModelDataAccordingSearch?.length > 0;
 
   return (
     <div className="w-full mx-auto pb-5 px-6 flex justify-between gap-16 items-stretch">
@@ -49,24 +57,24 @@ const FilterAndSortSection = ({
               className="w-full pl-4 py-2 outline-0 border-0 text-gray-background text-base font-medium bg-white"
               placeholder="apartment Location"
               value={filterDataSearch.search}
-              onChange={(e) =>
-                setFilterDataSearch((prev) => ({
-                  ...prev,
-                  search: e.target.value,
-                }))
-              }
+              onChange={(e) =>handleOnChangeSearch(e)}
               onClick={() => setDropdown(true)}
             />
             {searchQueryShow && (
               <ul className="absolute top-[105%] left-0 bg-base-100 rounded-box z-1 w-full p-2 shadow-sm">
-                {apartmentLocationDataPending || apartmentModelDataAccordingSearch?.map((apartmentLocation) => (
-                  <li
-                    key={apartmentLocation._id}
-                    onClick={() => handleSearch(apartmentLocation.apartmentLocation)}
-                  >
-                    <p>{apartmentLocation.apartmentLocation}</p>
-                  </li>
-                ))}
+                {apartmentLocationDataPending ||
+                  apartmentModelDataAccordingSearch?.map(
+                    (apartmentLocation) => (
+                      <li
+                        key={apartmentLocation._id}
+                        onClick={() =>
+                          handleSearch(apartmentLocation.apartmentLocation)
+                        }
+                      >
+                        <p>{apartmentLocation.apartmentLocation}</p>
+                      </li>
+                    )
+                  )}
               </ul>
             )}
           </div>
@@ -89,7 +97,6 @@ const FilterAndSortSection = ({
               <option value="">Choose Category</option>
               <option value="rent">Rent</option>
               <option value="sell">Sell</option>
-              
             </select>
           </div>
           {/* search button */}

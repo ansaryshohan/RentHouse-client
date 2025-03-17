@@ -1,12 +1,13 @@
-import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SocialLogin = () => {
   const { loginWithGoogle } = useAuthContext();
   const navigate = useNavigate();
   let location = useLocation();
+  const { axiosCredentialInstance } = useAxiosSecure();
 
   let from = location.state?.from || "/";
 
@@ -17,8 +18,8 @@ const SocialLogin = () => {
         if (user?.email) {
           // store the user in backend
           const userData = { name: user?.userName, email: user?.email };
-           await axios.post(
-            `${import.meta.env.VITE_backend}/rent-easy/user/create-user`,
+          await axiosCredentialInstance.post(
+            `${import.meta.env.VITE_render_backend}/rent-easy/user/create-user`,
             userData
           );
           navigate(from, { replace: true });

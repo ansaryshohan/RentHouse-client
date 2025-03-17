@@ -12,7 +12,7 @@ const useAllUserData = (currentPageNo,perPageData) => {
     queryKey: ["allUsers"],
     queryFn: async () => {
       const res = await axiosCredentialInstance.get(
-        `${import.meta.env.VITE_backend}/rent-easy/user/all-users?perPageData=${perPageData}&pageNo=${currentPageNo}`
+        `${import.meta.env.VITE_render_backend}/rent-easy/user/all-users?perPageData=${perPageData}&pageNo=${currentPageNo}`
       );
       // console.log(res.data.data);
       return res?.data?.data;

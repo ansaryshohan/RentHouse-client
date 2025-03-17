@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../components/shared/LoadingSpinner";
@@ -20,8 +19,8 @@ const SingleApartmentPage = () => {
   const { isPending, error, data, refetch } = useQuery({
     queryKey: ["singleApartment", id],
     queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_backend}/rent-easy/apartments/${id}`
+      const res = await axiosCredentialInstance.get(
+        `${import.meta.env.VITE_render_backend}/rent-easy/apartments/${id}`
       );
       return res?.data?.data;
     },
@@ -39,7 +38,7 @@ const SingleApartmentPage = () => {
       floorNo: data?.floorNo,
       blockNo: data?.blockNo,
       houseNo: data.houseNo,
-      location:data.location,
+      location: data.location,
       price: data?.price,
       apartmentImage: data?.mainImage,
       apartmentName: data.apartmentName,

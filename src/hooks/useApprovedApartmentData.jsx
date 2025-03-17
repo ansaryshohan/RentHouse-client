@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useApprovedApartmentData = (
   currentPageNo,
@@ -8,6 +8,8 @@ const useApprovedApartmentData = (
   apartmentCategory,
   searchText
 ) => {
+  const { axiosCredentialInstance } = useAxiosSecure();
+
   const {
     isPending: approvedApartmentDataPending,
     error: approvedApartmentDataError,
@@ -22,9 +24,9 @@ const useApprovedApartmentData = (
       searchText,
     ],
     queryFn: async () => {
-      const res = await axios.get(
+      const res = await axiosCredentialInstance.get(
         `${
-          import.meta.env.VITE_backend
+          import.meta.env.VITE_render_backend
         }/rent-easy/apartments/approved-apartments?perPageData=${perPageData}&pageNo=${currentPageNo}&priceSort=${priceSort}&apartmentType=${apartmentCategory}&searchText=${searchText}`
       );
       // console.log(res.data);

@@ -14,7 +14,7 @@ const useAdmin = () => {
     queryKey: ["userRole", user?.email],
     queryFn: async () => {
         const res = await axiosCredentialInstance.get(
-          `${import.meta.env.VITE_backend}/rent-easy/user/user-role/${
+          `${import.meta.env.VITE_render_backend}/rent-easy/user/user-role/${
             user?.email
           }`
         );

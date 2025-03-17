@@ -1,4 +1,5 @@
 import BannerSlider from "../components/homepageComp/BannerSlider";
+import OurServicesSection from "../components/homepageComp/OurServicesSection";
 import TopApartments from "../components/homepageComp/TopApartments";
 import Title from "../components/shared/Title";
 
@@ -8,6 +9,7 @@ const HomePage = () => {
       <Title title={"HomePage | RentEasy"} />
       <BannerSlider/>
       <TopApartments/>
+      <OurServicesSection/>
     </div>
   )
 }

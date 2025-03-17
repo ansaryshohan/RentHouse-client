@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useTopApartmentData = () => {
+  const { axiosCredentialInstance } = useAxiosSecure();
   const {
     isPending: topApartmentDataPending,
     error: topApartmentDataError,
@@ -9,8 +10,10 @@ const useTopApartmentData = () => {
   } = useQuery({
     queryKey: ["topApartment"],
     queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_backend}/rent-easy/apartments/top-apartments`
+      const res = await axiosCredentialInstance.get(
+        `${
+          import.meta.env.VITE_render_backend
+        }/rent-easy/apartments/top-apartments`
       );
       // console.log(res.data.data);
       return res?.data?.data;
