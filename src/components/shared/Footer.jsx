@@ -47,7 +47,7 @@ const Footer = () => {
           {/* Social Media Section */}
           <div className="text-center">
             <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
-            <div className="flex justify-center md:justify-start space-x-4">
+            <div className="flex justify-center space-x-4">
               <a
                 href="https://facebook.com"
                 target="_blank"
@@ -114,7 +114,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright Notice */}
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+        <div className="border-t border-gray-200 mt-8 pt-8 text-center">
           <p className="text-sm">
             &copy; {new Date().getFullYear()} MyWebsite. All rights reserved.
           </p>
