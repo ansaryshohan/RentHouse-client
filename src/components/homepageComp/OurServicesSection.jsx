@@ -38,6 +38,7 @@ const OurServicesSection = () => {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",
+          backgroundAttachment:"fixed",
           minHeight: "40vh",
         }}
       >
